@@ -1,4 +1,6 @@
 --edit /etc/pihole/logrotate--
+sudo vi /etc/pihole/logrotate
+
 /var/log/pihole.log {
         su root root
         daily
@@ -26,6 +28,7 @@ sudo usermod -a -G sudo pihole
 
 --give pihole user sudo right--
 visudo
+
 [...]
 #includedir /etc/sudoers.d
 pihole ALL=(ALL) NOPASSWD:/bin/gzip,/bin/cp,/bin/rm
@@ -37,6 +40,7 @@ sudo chown -R pihole:pihole pihole
 
 --Edit /etc/passwd to log as pihole--
 sudo vi /etc/passwd
+
 [...]
 pihole:x:999:995::/home/pihole:/bin/bash
 
@@ -45,17 +49,20 @@ su - pihole
 
 --Create Log management script--
 vi pihole_log_management.sh
+
 #!/bin/bash
 
 sudo gzip -9 /var/log/pihole.log.1 && sudo cp -p /var/log/pihole.log.1.gz /var/log/pihole/pihole.log.`date +"%Y-%m-%d"`.gz && sudo rm -f /var/log/pihole.log.1.gz && echo ok
 -------------------------------
 vi pihole_FTL_log_management.sh
+
 #!/bin/bash
 
 sudo gzip -9 /var/log/pihole-FTL.log.1 && sudo cp -p /var/log/pihole-FTL.log.1.gz /var/log/pihole/pihole-FTL.log.`date +"%Y-%m-%d"`.gz && sudo rm -f /var/log/pihole-FTL.log.1.gz && echo ok
 
 --Edit pihole's crontab--
 crontab -e
+
 #Script for log management
 0 9 * * * /home/pihole/pihole_log_management.sh  2>> /var/log/pihole/pihole_log_management_error.log
 0 9 * * * /home/pihole/pihole_FTL_log_management.sh 2>> /var/log/pihole/pihole_FTL_log_management_error.log
@@ -68,6 +75,7 @@ su - pi
 
 --Edit /etc/passwd--
 sudo vi /etc/passwd
+
 [...]
 pihole:x:999:995::/home/pihole:/usr/sbin/nologin
 
