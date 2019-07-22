@@ -51,7 +51,7 @@ login:
 #Update exim4 configuration
 sudo update-exim4.conf
 
-#Restart the exim service
+#Restart the exim4 service
 sudo /etc/init.d/exim4 restart
 
 #Test email sending (echo = corps message, mail -s = subject)
