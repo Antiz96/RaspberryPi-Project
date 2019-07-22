@@ -1,4 +1,4 @@
-Initial tutorial : https://web.archive.org/web/20130423104300/http://mattlong.posterous.com/enable-cron-emails-using-gmail-on-ubuntu
+Initial tutorial that helps me configure exim4 : https://web.archive.org/web/20130423104300/http://mattlong.posterous.com/enable-cron-emails-using-gmail-on-ubuntu
 
 --This configuration needs a working gmail address, you don't need a domain mane registered--
 
