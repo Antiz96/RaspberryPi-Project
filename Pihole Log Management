@@ -38,7 +38,7 @@ cd /home
 sudo mkdir pihole
 sudo chown -R pihole:pihole pihole
 
---Edit /etc/passwd to log as pihole--
+--Edit /etc/passwd to log as pihole (to try things up, you can also go as normal user using "sudo" if you prefer)--
 sudo vi /etc/passwd
 
 [...]
@@ -73,7 +73,7 @@ crontab -e
 --log as pi user--
 su - pi
 
---Edit /etc/passwd--
+--Edit /etc/passwd (to remake pihole a "nologin" user)--
 sudo vi /etc/passwd
 
 [...]
