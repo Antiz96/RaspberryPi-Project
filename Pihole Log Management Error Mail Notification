@@ -81,7 +81,7 @@ if [ $error != 0 ];then
   echo "error in /var/log/pihole/pihole_FTL_log_management_error.log" | mail -s "Error in pihole-FTL.log management" youremail1@example.com, youremail2@example.com
 fi
 
-#Make scripts useable bith pihole user
+#Make scripts useable by pihole user
 chown pihole:pihole mail_pihole_log_error.sh
 chmod 700 mail_pihole_log_error.sh
 chown pihole:pihole mail_pihole_FTL_log_error.sh
