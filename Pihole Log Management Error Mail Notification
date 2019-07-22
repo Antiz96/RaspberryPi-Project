@@ -63,7 +63,41 @@ echo "This is a test." | mail -s Testing yourmail1@example.com; yourmail2@exampl
 #su as root user
 su -
 
---Create Script 
+--Create Scripts in /home/pihole--
+sudo vi mail_pihole_log_error.sh
+
+#!/bin/bash
+
+error=$(cat /var/log/pihole/pihole_log_management_error.log | wc -l)
+
+if [ $error != 0 ];then
+  echo "error in /var/log/pihole/pihole_log_management_error.log" | mail -s "Error in pihole.log management" robincandau@protonmail.com, robincandau96@gmail.com
+fi
+------------------------------------
+sudo vi mail_pihole_FTL_log_error.sh
+
+#!/bin/bash
+
+error=$(cat /var/log/pihole/pihole_FTL_log_management_error.log | wc -l)
+
+if [ $error != 0 ];then
+  echo "error in /var/log/pihole/pihole_FTL_log_management_error.log" | mail -s "Error in pihole-FTL.log management" robincandau@protonmail.com, robincandau96@gmail.com
+fi
+
+#Make scripts useable bith pihole user
+chown pihole:pihole mail_pihole_log_error.sh
+chmod 700 mail_pihole_log_error.sh
+chown pihole:pihole mail_pihole_FTL_log_error.sh
+chmod 700 mail_pihole_FTL_log_error.sh
+
+#Edit pihole user crontab
+crontab -u pihole -e
+[...]
+#Mail Notification for Pihole Log Error
+0 10 * * * /home/pihole/mail_pihole_log_error.sh
+0 10 * * * /home/pihole/mail_pihole_FTL_log_error.sh
+
+
 
 
 
