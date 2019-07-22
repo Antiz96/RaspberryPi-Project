@@ -60,9 +60,6 @@ echo "This is a test." | mail -s Testing yourmail@example.com
 #If you wanna send a mail to multiples email addresses, here is the syntax
 echo "This is a test." | mail -s Testing yourmail1@example.com; yourmail2@example.com
 
-#su as root user
-su -
-
 --Create Scripts in /home/pihole--
 sudo vi mail_pihole_log_error.sh
 
