@@ -68,7 +68,7 @@ crontab -e
 0 9 * * * /home/pihole/pihole_FTL_log_management.sh 2>> /var/log/pihole/pihole_FTL_log_management_error.log
 
 #Log Suppression
-30 9 * * * find /var/log/pihole/ -maxdepth 1 -not -path /var/log/pihole/ mtime +7 -exec sudo rm -f {} \;
+30 9 * * * find /var/log/pihole/ -maxdepth 1 -not -path /var/log/pihole/ -mtime +7 -exec sudo rm -f {} \;
 
 --log as pi user--
 su - pi
