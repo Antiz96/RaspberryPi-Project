@@ -52,13 +52,21 @@ vi pihole_log_management.sh
 
 #!/bin/bash
 
-sudo gzip -9 /var/log/pihole.log.1 && sudo cp -p /var/log/pihole.log.1.gz /var/log/pihole/pihole.log.`date +"%Y-%m-%d"`.gz && sudo rm -f /var/log/pihole.log.1.gz && echo ok
+file=$([ -f /var/log/pihole.log.1 ] && echo "Found" || echo "Not Found")
+
+if [ "$file" = "Found" ];then
+        sudo gzip -9 /var/log/pihole.log.1 && sudo cp -p /var/log/pihole.log.1.gz /var/log/pihole/pihole.log.`date +"%Y-%m-%d"`.gz && sudo rm -f /var/log/pihole.log.1.gz
+fi
 -------------------------------
 vi pihole_FTL_log_management.sh
 
 #!/bin/bash
 
-sudo gzip -9 /var/log/pihole-FTL.log.1 && sudo cp -p /var/log/pihole-FTL.log.1.gz /var/log/pihole/pihole-FTL.log.`date +"%Y-%m-%d"`.gz && sudo rm -f /var/log/pihole-FTL.log.1.gz && echo ok
+file=$([ -f /var/log/pihole-FTL.log.1 ] && echo "Found" || echo "Not Found")
+
+if [ "$file" = "Found" ];then
+        sudo gzip -9 /var/log/pihole-FTL.log.1 && sudo cp -p /var/log/pihole-FTL.log.1.gz /var/log/pihole/pihole-FTL.log.`date +"%Y-%m-%d"`.gz && sudo rm -f /var/log/pihole-FTL.log.1.gz
+fi
 
 --Edit pihole's crontab--
 crontab -e
