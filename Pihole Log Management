@@ -69,7 +69,7 @@ file=$([ -f /var/log/pihole-FTL.log.1 ] && echo "Found" || echo "Not Found")
 if [ "$file" = "Found" ];then
         sudo gzip -9 /var/log/pihole-FTL.log.1 && sudo cp -p /var/log/pihole-FTL.log.1.gz /var/log/pihole/pihole-FTL.log.`date -d '-1 day' +"%Y-%m-%d"`.gz && sudo rm -f /var/log/pihole-FTL.log.1.gz
 else
-        echo "File /var/log/pihole.log.1 was not found" | mail -s "The pihole.log.1 file was not found" yourmail@example.com, yourmail2@example.com
+        echo "File /var/log/pihole-FTL.log.1 was not found" | mail -s "The pihole-FTL.log.1 file was not found" yourmail@example.com, yourmail2@example.com
 fi
 
 --Edit pihole's crontab--
