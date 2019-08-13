@@ -6,7 +6,7 @@ sudo ./whitelist.sh
 #Note: You don't have to clone the repo every time you need to update whitelist file. 
 #Navigate to whitelist/scripts and run it again sudo ./whitelist.sh
 
---Let's make a crontab that runs the script once a month (everyday first day of the month at 2 PM)--
+--Let's make a crontab that runs the script once a month (every first day of the month at 2 PM)--
 
 crontab -e
 
