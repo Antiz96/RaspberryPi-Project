@@ -2,3 +2,14 @@ git clone https://github.com/anudeepND/whitelist.git
 cd whitelist/scripts
 sudo chmod +x whitelist.sh
 sudo ./whitelist.sh
+
+#Note: You don't have to clone the repo every time you need to update whitelist file. 
+#Navigate to whitelist/scripts and run it again sudo ./whitelist.sh
+
+--Let's make a crontab that runs the script once a month (everyday first day of the month at 2 PM)--
+
+crontab -e
+
+#Update Pihole Whitelist
+
+0 2 1 * * sudo /home/pi/whitelist/scripts/whitelist.sh
