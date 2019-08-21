@@ -2,10 +2,10 @@ Initial tutorial that helps me configure exim4 : https://web.archive.org/web/201
 
 --This configuration needs a working gmail address, you don't need a domain name registered--
 
-#Install exim4 package
+##Install exim4 package
 sudo apt-get install exim4
  
-#Configure exim4
+##Configure exim4
 sudo dpkg-reconfigure exim4-config
 - choose mail sent by smarthost received via SMTP or fetchmail
 - Type System Mail Name: pi-hole.com
@@ -19,10 +19,10 @@ sudo dpkg-reconfigure exim4-config
 - Choose NO, split configuration into small files
 - Mail for postmaster : admin (or whatever you want)
 
-#Edit exim4 conf template
+##Edit exim4 conf template
 sudo vi /etc/exim4/exim4.conf.template
 
-#Find ".ifdef DCconfig_smarthost DCconfig_satellite" and add the following under it
+##Find ".ifdef DCconfig_smarthost DCconfig_satellite" and add the following under it
 .ifdef DCconfig_smarthost DCconfig_satellite
 send_via_gmail:
   driver = manualroute
@@ -30,34 +30,34 @@ send_via_gmail:
   transport = gmail_smtp
   route_list = * smtp.gmail.com
   
-#Find "begin authenticators" and add the following under it
+##Find "begin authenticators" and add the following under it
 gmail_login:
   driver = plaintext
   public_name = LOGIN
   client_send = : yourname@gmail.com : YourGmailPassword
   
-#Find "transport/30_exim4-config_remote_smtp_smarthost" and add the following under it
+##Find "transport/30_exim4-config_remote_smtp_smarthost" and add the following under it
 gmail_smtp:
   driver = smtp
   port = 587
   hosts_require_auth = $host_address
   hosts_require_tls = $host_address
   
-#Find ".ifndef AUTH_CLIENT_ALLOW_NOTLS_PASSWORDS" and change the above "public_name = LOGIN" variable to whatever you want
+##Find ".ifndef AUTH_CLIENT_ALLOW_NOTLS_PASSWORDS" and change the above "public_name = LOGIN" variable to whatever you want
 login:
   driver = plaintext
   public_name = DevNull (initially "= LOGIN", change it to whatever you want)
   
-#Update exim4 configuration
+##Update exim4 configuration
 sudo update-exim4.conf
 
-#Restart the exim4 service
+##Restart the exim4 service
 sudo /etc/init.d/exim4 restart
 
-#Test email sending (echo = corps message, mail -s = subject)
+##Test email sending (echo = corps message, mail -s = subject)
 echo "This is a test." | mail -s Testing yourmail@example.com
 
-#If you wanna send a mail to multiples email addresses, here is the syntax
+##If you wanna send a mail to multiples email addresses, here is the syntax
 echo "This is a test." | mail -s Testing yourmail1@example.com; yourmail2@example.com
 
 --Create Scripts in /home/pihole--
@@ -81,22 +81,15 @@ if [ $error != 0 ];then
   echo "error in /var/log/pihole/pihole_FTL_log_management_error.log" | mail -s "Error in pihole-FTL.log management" youremail1@example.com, youremail2@example.com
 fi
 
-#Make scripts useable by pihole user
+##Make scripts useable by pihole user
 chown pihole:pihole mail_pihole_log_error.sh
 chmod 700 mail_pihole_log_error.sh
 chown pihole:pihole mail_pihole_FTL_log_error.sh
 chmod 700 mail_pihole_FTL_log_error.sh
 
-#Edit pihole user crontab
+##Edit pihole user crontab
 crontab -u pihole -e
 [...]
 #Mail Notification for Pihole Log Error
 0 10 * * * /home/pihole/mail_pihole_log_error.sh
 0 10 * * * /home/pihole/mail_pihole_FTL_log_error.sh
-
-
-
-
-
-
-  
