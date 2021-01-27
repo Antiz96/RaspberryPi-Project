@@ -1,21 +1,16 @@
 #Pihole Crontab
 
 #Updating Pihole
-0 2 1 * * sudo pihole -up && echo -e "Subject:Pihole updated\n\nHello,\n\nPihole has been succesfully updated." | /usr/sbin/sendmail robincandau@protonmail.com, robincandau96@gmail.com || echo -e "Subject:Error during Pihole update\n\nHello,\n\nThere was an error during Pihole update." | /usr/sbin/sendmail robincandau@protonmail.com, robincandau96@gmail.com
+0 2 1 * * sudo pihole -up && echo -e "Subject:Pihole updated\n\nHello,\n\nPihole has been succesfully updated." | /usr/sbin/sendmail yourmailexample@mail.com, yourmailexample2@mail.com || echo -e "Subject:Error during Pihole update\n\nHello,\n\nThere was an error during Pihole update." | /usr/sbin/sendmail yourmailexample@mail.com, yourmailexample2@mail.com
 
 #Updating Blacklist
-0 3 * * 0 sudo pihole -g && echo -e "Subject:Pihole's blacklist updated\n\nHello,\n\nPihole's blacklist has been succesfully updated." | /usr/sbin/sendmail robincandau@protonmail.com, robincandau96@gmail.com || echo -e "Subject:Error during Pihole's blacklist update\n\nHello,\n\nThere was an error during Pihole's blacklist update." | /usr/sbin/sendmail robincandau@protonmail.com, robincandau96@gmail.com
-
+0 3 * * 0 sudo pihole -g && echo -e "Subject:Pihole's blacklist updated\n\nHello,\n\nPihole's blacklist has been succesfully updated." | /usr/sbin/sendmail yourmailexample@mail.com, yourmailexample2@mail.com || echo -e "Subject:Error during Pihole's blacklist update\n\nHello,\n\nThere was an error during Pihole's blacklist update." | /usr/sbin/sendmail yourmailexample@mail.com, yourmailexample2@mail.com
 #Updating Whitelist
 0 4 * * 0 sudo /usr/bin/python3 whitelist/scripts/whitelist.py && echo -e "Subject:Pihole's whitelist updated\n\nHello,\n\nThe Pihole's whitelist has been succesfully updated." | /usr/sbin/sendmail robincandau@protonmail.com, robincandau96@gmail.com || echo -e "Subject:Error during Pihole's whitelist update\n\nHello,\n\nThere was an error during the Pihole's whitelist update." | /usr/sbin/sendmail robincandau@protonmail.com, robincandau96@gmail.com 
 
 #Script for log management
-0 9 * * * /home/pihole/pihole_log_management.sh  2>> /var/log/pihole/pihole_log_management_error.log
-0 9 * * * /home/pihole/pihole_FTL_log_management.sh 2>> /var/log/pihole/pihole_FTL_log_management_error.log
+0 9 * * * /home/pihole/pihole_log_management.sh
+0 9 * * * /home/pihole/pihole_FTL_log_management.sh
 
 #Log Suppression
 30 9 * * * find /var/log/pihole/ -maxdepth 1 -not -path /var/log/pihole/ -mtime +7 -exec sudo rm -f {} \;
-
-#Mail Notification for Pihole Log Error
-0 10 * * * /home/pihole/mail_pihole_log_error.sh
-0 10 * * * /home/pihole/mail_pihole_FTL_log_error.sh
