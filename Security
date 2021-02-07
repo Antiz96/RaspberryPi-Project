@@ -1,7 +1,7 @@
 #This is how I secured the way my pihole is working (and my raspbian installation, generally speaking)
 
 1 - I gave a strong password to the root user account and make it impossible to log directly as root through ssh in the sshd_config file :
-[pi@pihole pihole]$ sudo vi /etc/ssh/sshd_config
+[pi@pihole ~]$ sudo vi /etc/ssh/sshd_config
 [...]
 PermitRootLogin no
 
@@ -17,7 +17,7 @@ I find it insane to create such a file by default. Anyway, I advise you to delet
 
 4 - I gave a stong password to the pihole user (which is the default user created during the pihole installation) and I removed it from the sudo group.
 This way, this user cannot run commands with sudo. I only gave him specific sudo rights (more on that on point 6).
-[pi@pihole pihole]$ sudo gpasswd -d pihole sudo
+[pi@pihole ~]$ sudo gpasswd -d pihole sudo
 
 5 - All the script automatically running through the crontab (and the crontab itself) belong to the pihole user.
 He only has the right to read and execute them :
@@ -29,7 +29,7 @@ But don't worry, I took care of that on point 7.
 6 - I only gave sudo right (without password) to the pihole user for those scripts (and only for those scripts).
 According to that, the pihole user gain temporary sudo rights during the execution of those scripts.
 This way, the pihole user doesn't have sudo rights on the entire binaries/commands used in the script, but only on what is specifically written in the scripts and only during their execution.
-[pi@pihole pihole]$ sudo visudo
+[pi@pihole ~]$ sudo visudo
 [...]
 pihole ALL=(ALL) NOPASSWD:/home/pihole/pihole_FTL_log_management.sh,/home/pihole/pihole_log_management.sh,/home/pihole/pihole_update.sh,/home/pihole/pihole_blacklist_update.sh,/home/pihole/pihole_whitelist_update.sh
 
@@ -42,7 +42,7 @@ L'utilisateur pihole peut utiliser les commandes suivantes sur pihole :
     (ALL) NOPASSWD: /home/pihole/pihole_FTL_log_management.sh, /home/pihole/pihole_log_management.sh, /home/pihole/pihole_update.sh, /home/pihole/pihole_blacklist_update.sh, /home/pihole/pihole_whitelist_update.sh
 
 7 - I made the pihole user account not available for login via the /etc/passwd file :
-[pi@pihole pihole]$ sudo vi /etc/passwd
+[pi@pihole ~]$ sudo vi /etc/passwd
 [...]
 pihole:x:999:995::/home/pihole:/usr/sbin/nologin
 
