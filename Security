@@ -1,0 +1,13 @@
+#This is how I secured the way my pihole is working (and my raspbian installation, generally speaking)
+
+1 - I gave a strong password to the root user account and make it impossible to log directly as root through ssh in the sshd_config file 
+(/etc/ssh/sshd_config ---> PermitRootLogin no)
+According to this, the only way to log as root is to log in from a different user first.
+
+2 - I gave a strong password to the pi user (which is the default user created at the installation of raspbian). 
+The password is obviously different from the root one.
+
+3 - I deleted the file under /etc/sudoers.d that makes the pi user capable of using sudo without password for any commands.
+This file is actually created by default during the raspbian installation. That is a big security threat/concern to me.
+I find it insane to create such a file by default. Anyway, I advise you to delete it aswell.
+[pi@pihole ~]$ sudo rm /etc/sudoers.d/010_pi-nopasswd
