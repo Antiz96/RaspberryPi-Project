@@ -15,8 +15,9 @@ This file is actually created by default during the raspbian installation. That 
 I find it insane to create such a file by default. Anyway, I advise you to delete it aswell so the system will ask for your password when using sudo (just like it normally should) :
 [pi@pihole ~]$ sudo rm /etc/sudoers.d/010_pi-nopasswd
 
-4 - I removed the pihole user (which is the default user created during the pihole installation) from the sudo group.
+4 - I gave a stong password to the pihole user (which is the default user created during the pihole installation) and I removed it from the sudo group.
 This way, this user cannot run commands with sudo. I only gave him specific sudo rights (more on that on point 6).
+[pi@pihole pihole]$ sudo gpasswd -d pihole sudo
 
 5 - All the script automatically running through the crontab (and the crontab itself) belong to the pihole user.
 He only has the right to read and execute them :
