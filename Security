@@ -27,7 +27,7 @@ I find it insane to create such a file by default. Anyway, I advise you to delet
 [pi@pihole ~]$ sudo rm /etc/sudoers.d/010_pi-nopasswd
 
 4 - I gave a strong password to the pihole user (which is the default user created during the pihole installation). The password is obviously different from the root user and the pi user password.
-It looks like it is included in the sudo group by default, so I removed it.
+It looks like the pihole user is included in the sudo group by default, so I removed it.
 This way, this user cannot run commands with sudo. I only gave him specific sudo rights (more on that on point 6).
 [pi@pihole ~]$ sudo gpasswd -d pihole sudo
 
