@@ -15,7 +15,7 @@ Permission denied, please try again.
 root@pihole's password:
 
 [pi@pihole ~]$ su -
-Mot de passe : 
+Password : 
 root@pihole:~#
 
 2 - I gave a strong password to the pi user (which is the default user created at the installation of raspbian). 
