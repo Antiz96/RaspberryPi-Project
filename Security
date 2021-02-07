@@ -5,7 +5,7 @@
 [...]
 PermitRootLogin no
 
-According to this, the only way to log as root via ssh is to log in to a different user first and use "su" command.
+According to this, the only way to log as root via ssh is to log in to a different user first and use the "su" command.
 
 2 - I gave a strong password to the pi user (which is the default user created at the installation of raspbian). 
 The password is obviously different from the root one.
